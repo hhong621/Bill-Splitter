@@ -1,0 +1,135 @@
+/* Reset START */
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* 2. Remove default margin */
+  * {
+    margin: 0;
+  }
+  
+  body {
+    /* 3. Add accessible line-height */
+    line-height: 1.5;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* 5. Improve media defaults */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /* 6. Inherit fonts for form controls */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /* 7. Avoid text overflows */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* 8. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  
+  /*
+    9. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+/* Reset END */
+
+/* Colors */
+:root {
+    --white: #FFFFFF;
+    --background: #000000;
+    --surface: #171717;
+    --primary: #D0FF00;
+    --warning: #FF0000;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    color: var(--white);
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    height: 800px;
+    width: 492px;
+    padding: 24px;
+    background-color: var(--surface);
+    border-radius: 16px;
+}
+
+.input-section {
+    gap: 32px;
+}
+
+#splitBillForm {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input[type=text] {
+    width: 100%;
+    height: 48px;
+    padding: 0 12px;
+    margin-top: 8px;
+    border: var(--white) 1px solid;
+    border-radius: 8px;
+    background-color: var(--background);
+    color: var(--white);
+}
+
+input[type=submit] {
+    width: 100%;
+    height: 64px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: var(--primary);
+    color: var(--background);
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0px -2px 4px 1px #00000077 inset;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
+    -webkit-text-fill-color: var(--white) !important;
+    caret-color: var(--white);
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+}
+
+input[type=submit]:active {
+    box-shadow: 0px 2px 4px 2px #00000077 inset;
+}

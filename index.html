@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Splitter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="input-section section">
+            <h1>Input</h1>
+            <form action="" id="splitBillForm">
+                <div class="form-body">
+                    <label>Bill Amount</label><br>
+                    <input type="text" id="billAmount" name="billAmount" placeholder="What's the bill amount?"><br><br>
+                    
+                    <p>Tip</p>
+                    <input type="radio" id="tip15" name="tip" value="15">
+                    <label for="tip15">15%</label><br>
+                    <input type="radio" id="tip20" name="tip" value="20">
+                    <label for="tip20">20%</label><br>  
+                    <input type="radio" id="tip25" name="tip" value="25">
+                    <label for="tip25">25%</label><br><br>
+                    
+                    <label>Number of People</label><br>
+                    <input type="text" id="numPeople" name="numPeople" placeholder="How many people are there?"><br><br>
+                </div>
+                
+                <input type="submit" value="Calculate">
+            </form>
+        </div>
+        
+        <div class="output-section section">
+            <h1>Output</h1>
+            <p>Bill Amount</p>
+            <p id="billOutput"></p>
+            <p>Tip Amount</p>
+            <p id="tipOutput"></p>
+            <hr>
+            <p>Total</p>
+            <p id="totalOutput"></p>
+            <p>Total per Person</p>
+            <p id="splitTotalOutput"></p>
+        </div>
+    </main>
+</body>
+<script>
+    let splitBillForm = document.getElementById("splitBillForm");
+    splitBillForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        //handle submit
+        //inputs
+        let billAmount = document.getElementById("billAmount").value;
+        let tipPercent = document.querySelector('input[name="tip"]:checked').value;
+        let numPeople = document.getElementById("numPeople").value;        
+        //computed
+        let tipAmount = (billAmount * tipPercent * 0.01).toFixed(2);
+        let total = Number(billAmount) + Number(tipAmount);
+        let splitTotal = (total / Number(numPeople)).toFixed(2);
+
+        //output
+        document.getElementById("billOutput").innerHTML = billAmount;
+        document.getElementById("tipOutput").innerHTML = tipAmount;
+        document.getElementById("totalOutput").innerHTML = total;
+        document.getElementById("splitTotalOutput").innerHTML = splitTotal;
+
+        console.log(splitTotal);
+    });
+</script>
+</html>
