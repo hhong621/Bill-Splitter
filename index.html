@@ -16,7 +16,7 @@
             <form action="" id="splitBillForm">
                 <div class="form-body">
                     <label>Bill Amount</label><br>
-                    <input type="text" id="billAmount" name="billAmount" placeholder="What's the bill amount?"><br><br>
+                    <input type="text" id="billAmount" name="billAmount" placeholder="What's the bill amount?" required>
                     
                     <p>Tip</p>
                     <input type="radio" id="tip15" name="tip" value="15">
@@ -24,10 +24,17 @@
                     <input type="radio" id="tip20" name="tip" value="20">
                     <label for="tip20">20%</label><br>  
                     <input type="radio" id="tip25" name="tip" value="25">
-                    <label for="tip25">25%</label><br><br>
+                    <label for="tip25">25%</label><br>
+                    <input type="radio" id="tipNone" name="tip" value="0">
+                    <label for="tipNone">No Tip</label><br>
+                    <input type="radio" id="tipCustom" name="tip" value="custom">
+                    <label for="tipCustom">Custom</label><br><br>
+
+                    <label id="customPercentLabel">Custom Tip</label>
+                    <input type="text" id="customPercent" name="customPercent" placeholder="Enter Custom Percentage">
                     
                     <label>Number of People</label><br>
-                    <input type="text" id="numPeople" name="numPeople" placeholder="How many people are there?"><br><br>
+                    <input type="text" id="numPeople" name="numPeople" placeholder="How many people are there?" required>
                 </div>
                 
                 <input type="submit" value="Calculate">
@@ -35,21 +42,39 @@
         </div>
         
         <div class="output-section section">
-            <h1>Output</h1>
-            <p>Bill Amount</p>
-            <p id="billOutput"></p>
-            <p>Tip Amount</p>
-            <p id="tipOutput"></p>
-            <hr>
-            <p>Total</p>
-            <p id="totalOutput"></p>
-            <p>Total per Person</p>
-            <p id="splitTotalOutput"></p>
+            <div class="output-body">
+                <h1>Output</h1>
+                <div class="output-row">
+                    <p>Bill Amount</p>
+                    <p class="output-num" id="billOutput">$0.00</p>
+                </div>
+    
+                <div class="output-row">
+                    <p>Tip Amount</p>
+                    <p class="output-num" id="tipOutput">$0.00</p>
+                </div>
+    
+                <hr>
+    
+                <div class="output-row">
+                    <p>Total</p>
+                    <p class="output-num" id="totalOutput">$0.00</p>                
+                </div>
+    
+                <div class="output-row">
+                    <p>Total per Person</p>
+                    <p class="output-num" id="splitTotalOutput">$0.00</p>
+                </div>
+            </div>
+            
+            <button id="resetButton">Reset</button>            
         </div>
     </main>
 </body>
 <script>
     let splitBillForm = document.getElementById("splitBillForm");
+    let resetButton = document.getElementById("resetButton");
+
     splitBillForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -57,19 +82,49 @@
         //inputs
         let billAmount = document.getElementById("billAmount").value;
         let tipPercent = document.querySelector('input[name="tip"]:checked').value;
-        let numPeople = document.getElementById("numPeople").value;        
+        let numPeople = document.getElementById("numPeople").value;   
+        
         //computed
+        if (tipPercent == "custom") {
+            tipPercent = Number(document.getElementById("customPercent").value);
+        }
         let tipAmount = (billAmount * tipPercent * 0.01).toFixed(2);
-        let total = Number(billAmount) + Number(tipAmount);
+
+        let total = (Number(billAmount) + Number(tipAmount)).toFixed(2);
         let splitTotal = (total / Number(numPeople)).toFixed(2);
 
         //output
-        document.getElementById("billOutput").innerHTML = billAmount;
-        document.getElementById("tipOutput").innerHTML = tipAmount;
-        document.getElementById("totalOutput").innerHTML = total;
-        document.getElementById("splitTotalOutput").innerHTML = splitTotal;
+        document.getElementById("billOutput").innerHTML = "$" + billAmount;
+        document.getElementById("tipOutput").innerHTML = "$" + tipAmount;
+        document.getElementById("totalOutput").innerHTML = "$" + total;
+        document.getElementById("splitTotalOutput").innerHTML = "$" + splitTotal;
+    });
 
-        console.log(splitTotal);
+    //hide show custom tip input
+    splitBillForm.addEventListener("click", (e) => {
+        let tipRadioCustom = document.getElementById("tipCustom");
+        let tipPercent = document.querySelector('input[name="tip"]:checked').value;
+        let customPercentLabel = document.getElementById("customPercentLabel");
+        let customPercentInput = document.getElementById("customPercent");
+
+        if (tipPercent == "custom") {
+            customPercentLabel.style.display = "flex";
+            customPercentInput.style.display = "flex";
+        } 
+        else {
+            customPercentLabel.style.display = "none";
+            customPercentInput.style.display = "none";
+        }
+        
+    });
+
+    resetButton.addEventListener("click", (e) => {
+        splitBillForm.reset();
+        //clear output
+        document.getElementById("billOutput").innerHTML = "$0.00";
+        document.getElementById("tipOutput").innerHTML = "$0.00";
+        document.getElementById("totalOutput").innerHTML = "$0.00";
+        document.getElementById("splitTotalOutput").innerHTML = "$0.00";
     });
 </script>
 </html>

@@ -83,8 +83,14 @@ main {
     border-radius: 16px;
 }
 
-.input-section {
-    gap: 32px;
+h1 {
+  margin-bottom: 32px;
+}
+
+.output-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #splitBillForm {
@@ -99,22 +105,11 @@ input[type=text] {
     height: 48px;
     padding: 0 12px;
     margin-top: 8px;
+    margin-bottom: 32px;
     border: var(--white) 1px solid;
     border-radius: 8px;
     background-color: var(--background);
     color: var(--white);
-}
-
-input[type=submit] {
-    width: 100%;
-    height: 64px;
-    font-size: 18px;
-    font-weight: 600;
-    background-color: var(--primary);
-    color: var(--background);
-    border-radius: 12px;
-    border: none;
-    box-shadow: 0px -2px 4px 1px #00000077 inset;
 }
 
 input:-webkit-autofill,
@@ -126,10 +121,56 @@ input:-webkit-autofill:active {
     caret-color: var(--white);
 }
 
-input[type=submit]:hover {
+input[type=submit] {
+  width: 100%;
+  height: 64px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: var(--background);
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0px -2px 4px 1px #00000077 inset;
+}
+
+button {
+  width: 100%;
+  height: 64px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: var(--white);
+  color: var(--background);
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0px -2px 4px 1px #00000077 inset;
+}
+
+input[type=submit]:hover, button:hover {
     cursor: pointer;
 }
 
-input[type=submit]:active {
+input[type=submit]:active, button:active {
     box-shadow: 0px 2px 4px 2px #00000077 inset;
+}
+
+.output-section {
+  gap: 16px;
+}
+
+.output-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.output-num {
+  font-size: 32px;
+}
+
+hr {
+  margin: 24px 0;
+}
+
+#customPercent, #customPercentLabel {
+  display: none;
 }
