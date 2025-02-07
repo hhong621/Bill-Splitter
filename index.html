@@ -19,16 +19,21 @@
                     <input type="text" id="billAmount" name="billAmount" placeholder="What's the bill amount?" required>
                     
                     <p>Tip</p>
-                    <input type="radio" id="tip15" name="tip" value="15">
-                    <label for="tip15">15%</label><br>
-                    <input type="radio" id="tip20" name="tip" value="20">
-                    <label for="tip20">20%</label><br>  
-                    <input type="radio" id="tip25" name="tip" value="25">
-                    <label for="tip25">25%</label><br>
-                    <input type="radio" id="tipNone" name="tip" value="0">
-                    <label for="tipNone">No Tip</label><br>
-                    <input type="radio" id="tipCustom" name="tip" value="custom">
-                    <label for="tipCustom">Custom</label><br><br>
+                    <div style="display: flex; flex-direction: row; gap: 8px; margin: 16px 0;">
+                        <input type="radio" id="tip15" name="tip" value="15">
+                        <label for="tip15" class="radio-num">15%</label><br>
+                        <input type="radio" id="tip20" name="tip" value="20">
+                        <label for="tip20" class="radio-num">20%</label><br>  
+                        <input type="radio" id="tip25" name="tip" value="25">
+                        <label for="tip25" class="radio-num">25%</label><br>
+                    </div>
+                    <div style="display: flex; flex-direction: row; gap: 8px;">
+                        <input type="radio" id="tipNone" name="tip" value="0">
+                        <label for="tipNone" class="radio-label radio-text">No Tip</label><br>
+                        <input type="radio" id="tipCustom" name="tip" value="custom">
+                        <label for="tipCustom" class="radio-label radio-text">Custom</label>
+                    </div>
+                    <br>
 
                     <label id="customPercentLabel">Custom Tip</label>
                     <input type="text" id="customPercent" name="customPercent" placeholder="Enter Custom Percentage">
@@ -48,6 +53,8 @@
                     <p>Bill Amount</p>
                     <p class="output-num" id="billOutput">$0.00</p>
                 </div>
+
+                <p class="output-num" style="text-align: right;">+</p>
     
                 <div class="output-row">
                     <p>Tip Amount</p>
@@ -60,6 +67,8 @@
                     <p>Total</p>
                     <p class="output-num" id="totalOutput">$0.00</p>                
                 </div>
+
+                <p style="text-align: right; margin: 12px 0;">/ <span id="numPeopleOutput"></span> people</p>
     
                 <div class="output-row">
                     <p>Total per Person</p>
@@ -98,6 +107,7 @@
         document.getElementById("tipOutput").innerHTML = "$" + tipAmount;
         document.getElementById("totalOutput").innerHTML = "$" + total;
         document.getElementById("splitTotalOutput").innerHTML = "$" + splitTotal;
+        document.getElementById("numPeopleOutput").innerHTML = numPeople;
     });
 
     //hide show custom tip input
@@ -125,6 +135,9 @@
         document.getElementById("tipOutput").innerHTML = "$0.00";
         document.getElementById("totalOutput").innerHTML = "$0.00";
         document.getElementById("splitTotalOutput").innerHTML = "$0.00";
+        document.getElementById("customPercentLabel").style.display = "none";
+        document.getElementById("customPercent").style.display = "none";
+        document.getElementById("numPeopleOutput").innerHTML = "";
     });
 </script>
 </html>

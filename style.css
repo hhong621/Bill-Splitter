@@ -105,7 +105,7 @@ input[type=text] {
     height: 48px;
     padding: 0 12px;
     margin-top: 8px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     border: var(--white) 1px solid;
     border-radius: 8px;
     background-color: var(--background);
@@ -153,6 +153,39 @@ input[type=submit]:active, button:active {
     box-shadow: 0px 2px 4px 2px #00000077 inset;
 }
 
+input[type=radio] {
+  display: none;
+}
+
+.radio-num {
+  border-radius: 12px;
+  border: var(--white) 1px solid;
+  font-size: 32px;
+  text-align: center;
+  width: 100%;
+  padding: 40px 0;
+}
+
+.radio-text {
+  border-radius: 12px;
+  border: var(--white) 1px solid;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+input[type=radio]:checked + .radio-num, input[type=radio]:checked + .radio-text {
+  background-color: var(--primary);
+  color: var(--background);
+  border: none;
+}
+
+.radio-num, .radio-text {
+  cursor: pointer;
+}
+
 .output-section {
   gap: 16px;
 }
@@ -165,6 +198,15 @@ input[type=submit]:active, button:active {
 
 .output-num {
   font-size: 32px;
+}
+
+#totalOutput {
+  font-size: 40px;
+}
+
+#splitTotalOutput {
+  font-size: 40px;
+  font-weight: 800;
 }
 
 hr {
