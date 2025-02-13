@@ -57,6 +57,10 @@
     --warning: #FF0000;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     display: flex;
     height: 100vh;
@@ -158,6 +162,7 @@ input[type=radio] {
 }
 
 .radio-num {
+  background-color: var(--background);
   border-radius: 12px;
   border: var(--white) 1px solid;
   font-size: 32px;
@@ -167,6 +172,7 @@ input[type=radio] {
 }
 
 .radio-text {
+  background-color: var(--background);
   border-radius: 12px;
   border: var(--white) 1px solid;
   font-size: 18px;
@@ -215,4 +221,32 @@ hr {
 
 #customPercent, #customPercentLabel {
   display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    align-items: start;
+  }
+  
+  main {
+    flex-direction: column;
+    padding: 24px 0;
+  }
+
+  .section {
+    width: 90vw;
+    height: fit-content;
+  }
+
+  .output-section {
+    justify-content: start;
+  }
+
+  .radio-num {
+    font-size: 24px;
+  }
+
+  .output-num, #totalOutput, #splitTotalOutput {
+    font-size: 24px;
+  }
 }

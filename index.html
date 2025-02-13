@@ -108,6 +108,9 @@
         document.getElementById("totalOutput").innerHTML = "$" + total;
         document.getElementById("splitTotalOutput").innerHTML = "$" + splitTotal;
         document.getElementById("numPeopleOutput").innerHTML = numPeople;
+
+        //scroll to for mobile
+        document.getElementsByClassName("output-section")[0].scrollIntoView();
     });
 
     //hide show custom tip input
@@ -128,6 +131,7 @@
         
     });
 
+    //reset input
     resetButton.addEventListener("click", (e) => {
         splitBillForm.reset();
         //clear output
@@ -138,6 +142,9 @@
         document.getElementById("customPercentLabel").style.display = "none";
         document.getElementById("customPercent").style.display = "none";
         document.getElementById("numPeopleOutput").innerHTML = "";
+
+        //scroll to for mobile
+        window.scrollTo(0, 0);
     });
 </script>
 </html>
