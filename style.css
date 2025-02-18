@@ -135,6 +135,7 @@ input[type=submit] {
   border-radius: 12px;
   border: none;
   box-shadow: 0px -2px 4px 1px #00000077 inset;
+  transition: 200ms ease-out;
 }
 
 button {
@@ -147,14 +148,17 @@ button {
   border-radius: 12px;
   border: none;
   box-shadow: 0px -2px 4px 1px #00000077 inset;
+  transition: 200ms ease-out;
 }
 
 input[type=submit]:hover, button:hover {
     cursor: pointer;
+    translate: 0 -2px;
 }
 
 input[type=submit]:active, button:active {
     box-shadow: 0px 2px 4px 2px #00000077 inset;
+    translate: 0 2px;
 }
 
 input[type=radio] {
@@ -180,6 +184,10 @@ input[type=radio] {
   text-align: center;
   width: 100%;
   padding: 20px 0;
+}
+
+.radio-num:hover, .radio-text:hover {
+  border: var(--primary) 1px solid;
 }
 
 input[type=radio]:checked + .radio-num, input[type=radio]:checked + .radio-text {
