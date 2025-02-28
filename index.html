@@ -35,7 +35,7 @@
                     </div>
                     <br>
 
-                    <label id="customPercentLabel">Custom Tip</label>
+                    <label id="customPercentLabel">Custom Tip Percent</label>
                     <input type="text" id="customPercent" name="customPercent" placeholder="Enter Custom Percentage">
                     
                     <label>Number of People</label><br>
@@ -51,28 +51,36 @@
                 <h1>Output</h1>
                 <div class="output-row">
                     <p>Bill Amount</p>
-                    <p class="output-num" id="billOutput">$0.00</p>
+                    <p class="output-num">
+                        <span>$</span><span id="billOutput">0.00</span>
+                    </p>
                 </div>
 
                 <p class="output-num" style="text-align: right;">+</p>
     
                 <div class="output-row">
                     <p>Tip Amount</p>
-                    <p class="output-num" id="tipOutput">$0.00</p>
+                    <p class="output-num">
+                        <span>$</span><span id="tipOutput">0.00</span>
+                    </p>
                 </div>
     
                 <hr>
     
                 <div class="output-row">
                     <p>Total</p>
-                    <p class="output-num" id="totalOutput">$0.00</p>                
+                    <p class="output-num output-big">
+                        <span>$</span><span id="totalOutput">0.00</span>
+                    </p>                
                 </div>
 
                 <p style="text-align: right; margin: 12px 0;">/ <span id="numPeopleOutput"></span> people</p>
     
                 <div class="output-row">
                     <p>Total per Person</p>
-                    <p class="output-num" id="splitTotalOutput">$0.00</p>
+                    <p class="output-num output-big">
+                        <strong><span>$</span><span id="splitTotalOutput">0.00</span></strong>
+                    </p>
                 </div>
             </div>
             
@@ -103,10 +111,10 @@
         let splitTotal = (total / Number(numPeople)).toFixed(2);
 
         //output
-        document.getElementById("billOutput").innerHTML = "$" + billAmount;
-        document.getElementById("tipOutput").innerHTML = "$" + tipAmount;
-        document.getElementById("totalOutput").innerHTML = "$" + total;
-        document.getElementById("splitTotalOutput").innerHTML = "$" + splitTotal;
+        animateNumber(document.getElementById("billOutput"), 0, billAmount, 300);
+        animateNumber(document.getElementById("tipOutput"), 0, tipAmount, 300);
+        animateNumber(document.getElementById("totalOutput"), 0, total, 300);
+        animateNumber(document.getElementById("splitTotalOutput"), 0, splitTotal, 300);
         document.getElementById("numPeopleOutput").innerHTML = numPeople;
 
         //scroll to for mobile
@@ -135,10 +143,10 @@
     resetButton.addEventListener("click", (e) => {
         splitBillForm.reset();
         //clear output
-        document.getElementById("billOutput").innerHTML = "$0.00";
-        document.getElementById("tipOutput").innerHTML = "$0.00";
-        document.getElementById("totalOutput").innerHTML = "$0.00";
-        document.getElementById("splitTotalOutput").innerHTML = "$0.00";
+        document.getElementById("billOutput").innerHTML = "0.00";
+        document.getElementById("tipOutput").innerHTML = "0.00";
+        document.getElementById("totalOutput").innerHTML = "0.00";
+        document.getElementById("splitTotalOutput").innerHTML = "0.00";
         document.getElementById("customPercentLabel").style.display = "none";
         document.getElementById("customPercent").style.display = "none";
         document.getElementById("numPeopleOutput").innerHTML = "";
@@ -146,5 +154,21 @@
         //scroll to for mobile
         window.scrollTo(0, 0);
     });
+
+    //helper function to animate numbers
+    function animateNumber(obj, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) {
+               startTimestamp = timestamp; 
+            }
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = (progress * (end - start) + start).toFixed(2);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
 </script>
 </html>
